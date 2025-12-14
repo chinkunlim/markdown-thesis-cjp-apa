@@ -1,0 +1,39 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{cjpsych}
+
+% 版面設定
+\RequirePackage{geometry}
+\geometry{a4paper, top=2.4cm, bottom=2.4cm, left=2.5cm, right=2.5cm}
+
+% 字體與行距
+\RequirePackage{fontspec}
+\RequirePackage{xeCJK}
+\setmainfont{Times New Roman}
+\setCJKmainfont[AutoFakeBold=3, AutoFakeSlant=true]{PMingLiU}
+\renewcommand{\normalsize}{\fontsize{12}{18}\selectfont}
+\RequirePackage{setspace}
+\onehalfspacing
+\RequirePackage{indentfirst}
+\setlength{\parindent}{2em}
+
+% 標題格式
+\RequirePackage{titlesec}
+\RequirePackage{zhnumber}
+\titleformat{\section}[block]{\centering\Large\bfseries}{}{0em}{}
+\renewcommand{\thesubsection}{(\zhnumber{\arabic{subsection}})}
+\titleformat{\subsection}[hang]{\large\bfseries}{\thesubsection}{0.5em}{}
+\renewcommand{\thesubsubsection}{\arabic{subsubsection}.}
+\titleformat{\subsubsection}[hang]{\normalsize\bfseries}{\thesubsubsection}{0.5em}{}
+\titleformat{\paragraph}[runin]{\normalsize\bfseries}{(\arabic{paragraph})}{0.5em}{}[。]
+
+% 圖表設定
+\RequirePackage{caption}
+\RequirePackage{graphicx}
+\RequirePackage{float}
+\RequirePackage{booktabs}
+\graphicspath{{Figure/}{./}} 
+\floatstyle{plaintop} % 強制標題在上方
+\restylefloat{figure}
+\captionsetup{labelsep=quad, singlelinecheck=false, justification=raggedright, font={bf}}
+\captionsetup[table]{name=表}
+\captionsetup[figure]{name=圖}
