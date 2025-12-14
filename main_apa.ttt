@@ -1,0 +1,16 @@
+\begin{table*}[hbt]
+\ifnextchar[{\eatarg}{}
+[htbp]
+    \centering
+    \caption{^^e5^^90^^84^^e7^^b5^^84^^e5^^8f^^8d^^e6^^87^^89^^e6^^99^^82^^e9^^96^^93^^e6^^8f^^8f^^e8^^bf^^b0^^e6^^80^^a7^^e7^^b5^^b1^^e8^^a8^^88} \label{tbl:rt_stats}
+    \begin{tabular}{lcc}
+        \toprule
+        ^^e7^^b5^^84^^e5^^88^^a5 & ^^e5^^b9^^b3^^e5^^9d^^87^^e6^^95^^b8 ($M$) & ^^e6^^a8^^99^^e6^^ba^^96^^e5^^b7^^ae ($SD$) \\
+        \midrule
+        ^^e5^^af^^a6^^e9^^a9^^97^^e7^^b5^^84 & 450.2 & 35.1 \\
+        ^^e6^^8e^^a7^^e5^^88^^b6^^e7^^b5^^84 & 510.5 & 42.8 \\
+        \bottomrule
+    \end{tabular}
+    \par \raggedright \footnotesize
+    \textit{^^e8^^a8^^bb}^^ef^^bc^^9a$N=60$^^e3^^80^^82^^e5^^96^^ae^^e4^^bd^^8d^^e7^^82^^ba^^e6^^af^^ab^^e7^^a7^^92 (ms)^^e3^^80^^82
+\end{table*}

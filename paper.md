@@ -40,7 +40,7 @@ keywords_en: "Automation, LaTeX, Academic Writing"
 
 系統會自動編號為「圖 X」，且標題在上方。
 
-![實驗流程示意圖](Figure/example.png){#fig:exp_flow}
+![實驗流程示意圖](Figure/example.jpeg){#fig:exp_flow}
 [Fig_Note] 註：受試者需先完成前測。
 
 # 結果
