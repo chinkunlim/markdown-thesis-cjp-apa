@@ -4,15 +4,16 @@ import subprocess
 import sys
 
 # ==========================================
-# [設定區] 絕對路徑設定 (根據您的電腦環境)
+# [設定區] 絕對路徑設定
 # ==========================================
 
-# 1. Pandoc 路徑 (這是您之前確認過的)
+# 1. Pandoc 路徑
 PANDOC_PATH = "/usr/local/bin/pandoc" 
 
-# 2. Latexmk 路徑 (這是您剛剛找到的！)
-# 我們直接把它寫進去，Python 就不會找不到
-LATEXMK_PATH = "/Users/limchinkun/bin/latexmk"
+# 2. MiKTeX 執行檔路徑 (都在您的 bin 資料夾下)
+# 請確認這個路徑是正確的 (根據您之前的回報)
+BIN_DIR = "/Users/limchinkun/bin"
+LATEXMK_PATH = os.path.join(BIN_DIR, "latexmk")
 
 # ==========================================
 
@@ -78,22 +79,26 @@ def compile_pdf(tex_file):
     print(f"\n🚀 正在編譯 PDF ({tex_file})...")
     
     if not os.path.exists(LATEXMK_PATH):
-        print(f"❌ 錯誤: 找不到 Latexmk 執行檔。")
+        print(f"❌ 錯誤: 找不到 Latexmk。請確認 {LATEXMK_PATH} 存在。")
         return
 
+    # [關鍵修正] 使用 -pdfxe 參數，這是 latexmk 指定使用 XeLaTeX 的標準方式
     cmd = [
         LATEXMK_PATH, 
-        "-g",       # <--- [新增] 強制重新編譯 (解決 Nothing to do 問題)
-        "-xelatex", 
+        "-g",           # 強制重編
+        "-pdfxe",       # <--- 重點：強制使用 XeLaTeX 引擎產生 PDF
         "-synctex=1", 
         "-interaction=nonstopmode", 
         "-file-line-error", 
-        "-pdf", 
         tex_file
     ]
     
+    # [額外保險] 設定環境變數，確保 latexmk 找得到同資料夾下的 xelatex
+    env = os.environ.copy()
+    env["PATH"] = f"{BIN_DIR}:{env.get('PATH', '')}"
+
     try:
-        subprocess.run(cmd, check=True)
+        subprocess.run(cmd, check=True, env=env)
         print(f"✅ 成功生成: {tex_file.replace('.tex', '.pdf')}")
     except Exception as e:
         print(f"❌ 編譯失敗: {e}")
@@ -109,25 +114,20 @@ def main():
 
     ensure_dir(OUTPUT_DIR)
 
-    # 1. 生成 Metadata
     latex_meta, target_format = parse_yaml_to_latex(full_content)
     with open(METADATA_FILE, "w", encoding="utf-8") as f:
         f.write(latex_meta)
 
-    # 2. 處理圖表
     processed_content = transform_figures(full_content)
 
-    # 3. Pandoc 轉換
     print("轉換 Markdown 內文...")
     try:
-        # [修正重點] 使用變數 PANDOC_PATH
         result = subprocess.run([PANDOC_PATH] + PANDOC_ARGS, input=processed_content,
                                 capture_output=True, text=True, encoding='utf-8', check=True)
         latex_body = result.stdout
     except Exception as e:
         print(f"Pandoc 錯誤: {e}"); sys.exit(1)
 
-    # 4. 切割章節
     pattern = re.compile(r'(\\section\{([^}]+)\}.*?)(?=\\section\{|$)', re.DOTALL)
     matches = pattern.findall(latex_body)
     
@@ -145,7 +145,6 @@ def main():
     with open(BODY_FILE, "w", encoding="utf-8") as f:
         f.write("\n".join(body_content))
 
-    # 5. 編譯 PDF
     if target_format and target_format in FORMAT_MAPPING:
         compile_pdf(FORMAT_MAPPING[target_format])
     else:
