@@ -1,0 +1,13 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Build Paper",
+            "type": "shell",
+            "command": "python3", 
+            "args": ["${workspaceFolder}/split_sections.py"],
+            "group": { "kind": "build", "isDefault": true },
+            "presentation": { "reveal": "always" }
+        }
+    ]
+}

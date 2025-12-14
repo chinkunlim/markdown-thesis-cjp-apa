@@ -8,5 +8,4 @@
 *.fdb_latexmk
 *.synctex.gz
 __pycache__/
-.vscode/
 *.pdf

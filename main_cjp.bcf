@@ -3071,7 +3071,18 @@
     <bcf:datasource type="file" datatype="bibtex" glob="false">references.bib</bcf:datasource>
   </bcf:bibdata>
   <bcf:section number="0">
-    <bcf:citekey order="1" intorder="1">huang2005</bcf:citekey>
+    <bcf:citekey order="1" intorder="1">moe2014</bcf:citekey>
+    <bcf:citekey order="2" intorder="1">lenneberg1967</bcf:citekey>
+    <bcf:citekey order="3" intorder="1">johnson1989</bcf:citekey>
+    <bcf:citekey order="4" intorder="1">hartshorne2018</bcf:citekey>
+    <bcf:citekey order="5" intorder="1">kim1997</bcf:citekey>
+    <bcf:citekey order="6" intorder="1">pliatsikas2020</bcf:citekey>
+    <bcf:citekey order="7" intorder="1">kim1997</bcf:citekey>
+    <bcf:citekey order="8" intorder="1">bialystok2011</bcf:citekey>
+    <bcf:citekey order="9" intorder="1">hartshorne2018</bcf:citekey>
+    <bcf:citekey order="10" intorder="1">pasquarella2011</bcf:citekey>
+    <bcf:citekey order="11" intorder="1">taipei2024</bcf:citekey>
+    <bcf:citekey order="12" intorder="1">lin2020</bcf:citekey>
   </bcf:section>
   <!-- SORTING TEMPLATES -->
   <bcf:sortingtemplate name="apa">
